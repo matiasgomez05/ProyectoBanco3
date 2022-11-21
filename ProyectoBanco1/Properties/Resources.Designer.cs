@@ -61,7 +61,7 @@ namespace ProyectoBanco1.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Data Source=DESKTOP-GENEK1F\SQLEXPRESS;Initial Catalog=homebanking;Integrated Security=True;Encrypt=False.
+        ///   Busca una cadena traducida similar a Data Source=DESKTOP-S5U81LP\SQLEXPRESS;Initial Catalog=homebanking;Integrated Security=True;Encrypt=False.
         /// </summary>
         internal static string connectionStr {
             get {

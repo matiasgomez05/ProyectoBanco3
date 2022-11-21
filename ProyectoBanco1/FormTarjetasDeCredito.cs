@@ -42,7 +42,7 @@ namespace ProyectoBanco1
                 
                    
 
-            foreach (var obj in banco.obtenerTarjetasDeCredito())
+            foreach (var obj in banco.tarjetas)
             {
                 if (banco.usuarioActual.id == obj.idTitular)
                 {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="connectionStr" xml:space="preserve">
-    <value>Data Source=DESKTOP-GENEK1F\SQLEXPRESS;Initial Catalog=homebanking;Integrated Security=True;Encrypt=False</value>
+    <value>Data Source=DESKTOP-S5U81LP\SQLEXPRESS;Initial Catalog=homebanking;Integrated Security=True;Encrypt=False</value>
     <comment>Conexion a BD de SQL Server</comment>
   </data>
 </root>
