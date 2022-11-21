@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj": {}
+    "C:\\Users\\Juan\\Documents\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj": {
+    "C:\\Users\\Juan\\Documents\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj",
+        "projectUniqueName": "C:\\Users\\Juan\\Documents\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
         "projectName": "ProyectoBanco1",
-        "projectPath": "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj",
-        "packagesPath": "C:\\Users\\Matias\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\obj\\",
+        "projectPath": "C:\\Users\\Juan\\Documents\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
+        "packagesPath": "C:\\Users\\Juan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Juan\\Documents\\ProyectoBanco3\\ProyectoBanco1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Matias\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -78,7 +78,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

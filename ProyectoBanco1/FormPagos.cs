@@ -132,14 +132,11 @@ namespace ProyectoBanco1
 
             refresh();
 
-            foreach (var obj in banco.tarjetas)
+            foreach (var obj in banco.usuarioActual.tarjetas)
             { 
 
-                if (banco.usuarioActual.id == obj.idTitular)
-                {
-
                     comboBox2.Items.Add(obj.numero);
-                }
+             
                 
             }
 
@@ -151,18 +148,12 @@ namespace ProyectoBanco1
 
             refresh();
 
-            foreach (var obj in banco.usuarioCaja)
-            {
-                foreach (var obj2 in banco.obtenerCajas())
+                foreach (var obj in banco.usuarioActual.cajas)
                 {
-                    if (obj.idUsuario == banco.usuarioActual.id && obj2.id == obj.idCaja)
-                    {
+                        comboBox2.Items.Add(obj.cbu);
 
-                        comboBox2.Items.Add(obj2.cbu);
-
-                    }
                 }
-            }
+            
         }
         private void checkBox2_CheckStateChanged(object sender, EventArgs e)
         {

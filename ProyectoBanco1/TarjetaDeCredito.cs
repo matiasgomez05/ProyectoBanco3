@@ -18,9 +18,9 @@ namespace ProyectoBanco1
         public double consumos { get; set; }
 
         public TarjetaDeCredito() { }
-        public TarjetaDeCredito(int id, int idTitular, int numero, int codigoV, double limite, double consumos)
+        public TarjetaDeCredito( int idTitular, int numero, int codigoV, double limite, double consumos)
         {
-            this.id = id;
+           
             this.idTitular = idTitular;
             this.numero = numero;
             this.codigoV = codigoV;

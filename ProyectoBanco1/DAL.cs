@@ -66,48 +66,48 @@ namespace ProyectoBanco1
         }
 
         // INICIALIZAR PLAZO FIJO.
-        public List<PlazoFijo> inicializarPfs()
-        {
+        //public List<PlazoFijo> inicializarPfs()
+        //{
             
-            List<PlazoFijo> dbPfs = new List<PlazoFijo>();
+        //    List<PlazoFijo> dbPfs = new List<PlazoFijo>();
 
-            string query = "SELECT * FROM dbo.plazoFijo";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand comando = new SqlCommand(query, connection);
-                try
-                {
-                    connection.Open();
-                    SqlDataReader reader = comando.ExecuteReader();
-                    PlazoFijo nuevoPf;
-                    while (reader.Read())
-                    {
-                        nuevoPf = new PlazoFijo(
-                            reader.GetInt32(0),     //id
-                            reader.GetInt32(1),     //idTitular
-                            reader.GetDouble(2),    //monto
-                            reader.GetDateTime(3),    //fechaIni
-                            reader.GetDateTime(4),    //fechaFin
-                            reader.GetDouble(5),    //tasa
-                            reader.GetBoolean(6),  //pagado
-                            reader.GetInt32(7)    // cbu
-                            );    
+        //    string query = "SELECT * FROM dbo.plazoFijo";
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        SqlCommand comando = new SqlCommand(query, connection);
+        //        try
+        //        {
+        //            connection.Open();
+        //            SqlDataReader reader = comando.ExecuteReader();
+        //            PlazoFijo nuevoPf;
+        //            while (reader.Read())
+        //            {
+        //                nuevoPf = new PlazoFijo(
+        //                    reader.GetInt32(0),     //id
+        //                    reader.GetInt32(1),     //idTitular
+        //                    reader.GetDouble(2),    //monto
+        //                    reader.GetDateTime(3),    //fechaIni
+        //                    reader.GetDateTime(4),    //fechaFin
+        //                    reader.GetDouble(5),    //tasa
+        //                    reader.GetBoolean(6),  //pagado
+        //                    reader.GetInt32(7)    // cbu
+        //                    );    
 
-                        dbPfs.Add(nuevoPf);
-                    }
-                    reader.Close();
+        //                dbPfs.Add(nuevoPf);
+        //            }
+        //            reader.Close();
 
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message);
-                    Console.WriteLine(error.Message);
-                }
-            }
+        //        }
+        //        catch (Exception error)
+        //        {
+        //            MessageBox.Show(error.Message);
+        //            Console.WriteLine(error.Message);
+        //        }
+        //    }
 
-            return dbPfs;
+        //    return dbPfs;
 
-        }
+        //}
 
         // AGREGAR PLAZO FIJO.
 
@@ -191,49 +191,49 @@ namespace ProyectoBanco1
         //   INICIALIZAR TARJETA DE CREDITO.
 
 
-        public List<TarjetaDeCredito> inicializarTarjetas()
-        {
+        //public List<TarjetaDeCredito> inicializarTarjetas()
+        //{
 
-            List<TarjetaDeCredito> dbTarjetas = new List<TarjetaDeCredito>();
+        //    List<TarjetaDeCredito> dbTarjetas = new List<TarjetaDeCredito>();
 
-            string query = "SELECT * FROM dbo.tarjeta";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand comando = new SqlCommand(query, connection);
-                try
-                {
-                    connection.Open();
-                    SqlDataReader reader = comando.ExecuteReader();
-                    TarjetaDeCredito nuevaTarjeta;
-                    while (reader.Read())
-                    {
-                        nuevaTarjeta = new TarjetaDeCredito(
-                            reader.GetInt32(0),     //id
-                            reader.GetInt32(1),     //idTitular
-                            reader.GetInt32(2),    //numero
-                            reader.GetInt32(3),    //codigo
-                            reader.GetDouble(4),    //limite
-                            reader.GetDouble(5)   // consumos
-                            );
+        //    string query = "SELECT * FROM dbo.tarjeta";
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        SqlCommand comando = new SqlCommand(query, connection);
+        //        try
+        //        {
+        //            connection.Open();
+        //            SqlDataReader reader = comando.ExecuteReader();
+        //            TarjetaDeCredito nuevaTarjeta;
+        //            while (reader.Read())
+        //            {
+        //                nuevaTarjeta = new TarjetaDeCredito(
+        //                    reader.GetInt32(0),     //id
+        //                    reader.GetInt32(1),     //idTitular
+        //                    reader.GetInt32(2),    //numero
+        //                    reader.GetInt32(3),    //codigo
+        //                    reader.GetDouble(4),    //limite
+        //                    reader.GetDouble(5)   // consumos
+        //                    );
 
-                        dbTarjetas.Add(nuevaTarjeta);
+        //                dbTarjetas.Add(nuevaTarjeta);
 
 
 
-                    }
-                    reader.Close();
+        //            }
+        //            reader.Close();
 
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message);
-                    Console.WriteLine(error.Message);
-                }
-            }
+        //        }
+        //        catch (Exception error)
+        //        {
+        //            MessageBox.Show(error.Message);
+        //            Console.WriteLine(error.Message);
+        //        }
+        //    }
 
-            return dbTarjetas;
+        //    return dbTarjetas;
 
-        }
+        //}
 
 
         // AGREGAR TARJETA DE CREDITO.
