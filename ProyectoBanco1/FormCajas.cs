@@ -108,7 +108,7 @@ namespace ProyectoBanco1
             label9.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
 
             comboBox1.Items.Clear();
-            foreach (CajaDeAhorro caja in banco.cajas)
+            foreach (CajaDeAhorro caja in banco.obtenerCajas())
             {
                 if (label7.Text != caja.cbu.ToString()) comboBox1.Items.Add(caja.cbu);
             }
@@ -119,7 +119,7 @@ namespace ProyectoBanco1
             dataGridView1.Rows.Clear();
             dataGridView2.Rows.Clear();
 
-            foreach (CajaDeAhorro caja in banco.obtenerCajas())
+            foreach (CajaDeAhorro caja in banco.usuarioActual.cajas.ToList())
             {
                 dataGridView1.Rows.Add(caja.id, caja.cbu, caja.saldo);
             }

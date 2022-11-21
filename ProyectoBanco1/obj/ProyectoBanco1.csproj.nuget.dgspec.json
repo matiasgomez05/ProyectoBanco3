@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programacion\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {}
+    "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj": {}
   },
   "projects": {
-    "D:\\Programacion\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {
+    "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programacion\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
+        "projectUniqueName": "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj",
         "projectName": "ProyectoBanco1",
-        "projectPath": "D:\\Programacion\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
+        "projectPath": "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\ProyectoBanco1.csproj",
         "packagesPath": "C:\\Users\\Matias\\.nuget\\packages\\",
-        "outputPath": "D:\\Programacion\\ProyectoBanco3\\ProyectoBanco1\\obj\\",
+        "outputPath": "C:\\Users\\Matias\\Desktop\\Nueva carpeta\\ProyectoBanco1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Matias\\AppData\\Roaming\\NuGet\\NuGet.Config",

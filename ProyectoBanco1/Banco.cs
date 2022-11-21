@@ -114,8 +114,8 @@ namespace ProyectoBanco1
 
                 usuario.intentosFallidos = 0;
                 contexto.usuarios.Update(usuario);
-                contexto.SaveChanges();
 
+                contexto.SaveChanges();
                 this.usuarioActual = usuario;
                 return 1;
             }
@@ -123,8 +123,8 @@ namespace ProyectoBanco1
             {
                 usuario.intentosFallidos++;
                 contexto.usuarios.Update(usuario);
-                contexto.SaveChanges();
 
+                contexto.SaveChanges();
                 return -1;
             }
 
@@ -148,107 +148,101 @@ namespace ProyectoBanco1
         public bool depositar(int idCaja, double monto)
         {
             DateTime fecha = DateTime.Now;
-            int idNuevoMov = -1;
-            foreach (CajaDeAhorro caja in cajas)
+            try
             {
-                if (caja.id == idCaja)
-                {
-                    caja.saldo += monto;
-                    DB.modificarCaja(idCaja, caja.saldo);
+                CajaDeAhorro caja = contexto.cajas.Where(c => c.id == idCaja).FirstOrDefault();
+                if (caja == null) return false;
 
-                    idNuevoMov = DB.agregarMovimiento(idCaja, "Deposito de $" + monto, monto, fecha);
-                    if (idNuevoMov != -1)
-                    {
-                        Movimiento movimiento = new Movimiento(idNuevoMov, idCaja, "Deposito de $" + monto, monto, fecha);
-                        movimientos.Add(movimiento);
-                        caja.movimientos.Add(movimiento);
-                    }
-                    return true;
-                }
+                caja.saldo += monto;
+                contexto.cajas.Update(caja);
+
+                Movimiento mov = new Movimiento(idCaja, "Deposito", monto, fecha);
+                contexto.movimientos.Add(mov);
+
+                contexto.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
             }
 
-            return false;
         }
         //Retirar dinero de la caja de ahorro seleccionada, siempre que tenga saldo suficiente
         public bool retirar(int idCaja, double monto)
         {
             DateTime fecha = DateTime.Now;
-            int idNuevoMov = -1;
-            foreach (CajaDeAhorro caja in cajas)
+            try
             {
-                if (caja.id == idCaja)
+                CajaDeAhorro caja = contexto.cajas.Where(c => c.id == idCaja).FirstOrDefault();
+                if (caja == null) return false;
+
+                if(monto <= caja.saldo)
                 {
-                    if(monto <= caja.saldo)
-                    {
-                        caja.saldo -= monto;
-                        DB.modificarCaja(idCaja, caja.saldo);
+                    caja.saldo -= monto;
+                    contexto.cajas.Update(caja);
 
-                        idNuevoMov = DB.agregarMovimiento(idCaja, "Extracción de $" + monto, monto, fecha);
-                        if (idNuevoMov != -1)
-                        {
-                            Movimiento movimiento = new Movimiento(idNuevoMov, idCaja, "Extracción de $" + monto, monto, fecha);
-                            movimientos.Add(movimiento);
-                            caja.movimientos.Add(movimiento);
-                        }
-                        return true;
-                    } 
-                    else
-                    {
-                        return false;
-                    }
+                    Movimiento movimiento = new Movimiento(idCaja, "Extracción", monto, fecha);
+                    contexto.movimientos.Add(movimiento);
+
+                    contexto.SaveChanges();
+                    return true;
                 } 
+                else
+                {
+                    return false;
+                }
+                 
             }
-
-            return false;
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
         //Transferir dinero a la caja de ahorro seleccionada
         public bool transferir(int idCajaOrigen, int cbuCajaDestino, double monto)
         {
             DateTime fecha = DateTime.Now;
-            int idNuevoMov = -1;
-            foreach (CajaDeAhorro origen in cajas)
+            try
             {
-                if (origen.id == idCajaOrigen)
+                CajaDeAhorro origen = contexto.cajas.Where(c => c.id == idCajaOrigen).FirstOrDefault();
+                if (origen == null) return false;
+
+                if (monto <= origen.saldo)
                 {
-                    if (monto <= origen.saldo)
-                    {
-                        origen.saldo -= monto;
-                        DB.modificarCaja(origen.id, origen.saldo);
+                    origen.saldo -= monto;
+                    contexto.cajas.Update(origen);
 
-                        foreach (CajaDeAhorro destino in cajas)
-                        {
-                            if (destino.cbu == cbuCajaDestino)
-                            {
-                                destino.saldo += monto;
-                                DB.modificarCaja(destino.id, destino.saldo);
+                    CajaDeAhorro destino = contexto.cajas.Where(c => c.cbu == cbuCajaDestino).FirstOrDefault();
+                    if (destino == null) return false;
 
-                                string detalle = "Transferencia de $" + monto;
-                                string detalleOrigen = detalle + " al Destino: CBU " + destino.cbu;
-                                string detalleDestino = detalle + "+ del Origen: CBU " + origen.cbu;
+                    destino.saldo += monto;
+                    contexto.cajas.Update(destino);
 
-                                idNuevoMov = DB.agregarMovimiento(origen.id, detalleOrigen, monto, fecha);
-                                if (idNuevoMov != -1)
-                                {
-                                    Movimiento movimiento = new Movimiento(idNuevoMov, origen.id, detalleOrigen, monto, fecha);
-                                    movimientos.Add(movimiento);
-                                    origen.movimientos.Add(movimiento);
-                                }
+                    string detalleOrigen = "Transferencia al Destino: CBU " + destino.cbu;
+                    string detalleDestino = "Transferencia del Origen: CBU " + origen.cbu;
 
-                                idNuevoMov = DB.agregarMovimiento(destino.id, detalleDestino, monto, fecha);
-                                if (idNuevoMov != -1)
-                                {
-                                    Movimiento movimiento = new Movimiento(idNuevoMov, destino.id, detalleDestino, monto, fecha);
-                                    movimientos.Add(movimiento);
-                                    destino.movimientos.Add(movimiento);
-                                }
-                                return true;
-                            }
-                        }
-                    }
-                    else return false;
+                    Movimiento mov1 = new Movimiento(origen.id, detalleOrigen, monto, fecha);
+                    contexto.movimientos.Add(mov1);
+
+                    Movimiento mov2 = new Movimiento(destino.id, detalleDestino, monto, fecha);
+                    contexto.movimientos.Add(mov2);
+
+                    contexto.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return false;
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
         /*
@@ -322,48 +316,58 @@ namespace ProyectoBanco1
          */
 
         //Agregar una nueva caja de ahorro para el usuario en cuestion
-        public void altaCajaAhorro(Usuario usuario)
+        public bool altaCajaAhorro(Usuario usuario)
         {
             DateTime DT = DateTime.Now;
-
             int cbuAleatorio = int.Parse(DT.ToString("ddhhmmss"));
-            int idNuevaCaja = DB.agregarCajas(cbuAleatorio, 0);
-            if (idNuevaCaja != -1)
+            CajaDeAhorro cajaAux = new CajaDeAhorro(cbuAleatorio, 0);
+
+            try
             {
-                CajaDeAhorro cajaAux = new CajaDeAhorro(idNuevaCaja, cbuAleatorio, 0);
-                int idNuevaRelacion = DB.agregarUsuarioCaja(usuario.id, idNuevaCaja);
-                if (idNuevaRelacion != -1)
-                {
-                    cajaAux.titulares.Add(usuario);
-                    usuario.cajas.Add(cajaAux);
-                    cajas.Add(cajaAux);
+                Usuario usr = contexto.usuarios.Where(u => u.id == usuario.id).FirstOrDefault();
+                if (usr == null) return false;
 
-                    UsuarioCaja uc1 = new UsuarioCaja(idNuevaRelacion, usuario.id, idNuevaCaja);
-                    usuarioCaja.Add(uc1);
-                }
+                contexto.cajas.Add(cajaAux);
+                usr.cajas.Add(cajaAux);
+                contexto.usuarios.Update(usr);
+
+                contexto.SaveChanges();
+                return true;
             }
-
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
         //Eliminar la caja de ahorro del usuario en cuestion solo si su saldo es cero
         public bool bajaCajaAhorro(Usuario usuario, int id)
         {
-            foreach (CajaDeAhorro caja in obtenerCajas())
+            try
             {
-                if (caja.id == id)
+                bool salida = false;
+                foreach (CajaDeAhorro caja in obtenerCajas())
                 {
-                    if (caja.saldo == 0)
+                    if (caja.id == id)
                     {
-                        if (DB.eliminarCaja(id) == 1) cajas.Remove(caja);
-                        if (DB.eliminarUsuarioCaja(id) == 1) usuario.cajas.Remove(caja);
-                        
-                        return true;
-                    } 
-                    else return false;
-                } 
+                        if (caja.saldo == 0)
+                        {
+                            usuario.cajas.Remove(caja);
+                            contexto.cajas.Remove(caja);
+                            salida = true;
+                        }
+                        if (salida) { contexto.SaveChanges(); return true; }
+                    }
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false; 
             }
 
-            return false;
         }
 
         //Modificar la caja de ahorro del usuario en cuestion 
@@ -457,7 +461,7 @@ namespace ProyectoBanco1
                                 int idNuevoMov = DB.agregarMovimiento(obj.id,"Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
                                 if (idNuevoMov != -1)
                                 {
-                                    Movimiento m1 = new Movimiento(idNuevoMov, obj.id, "Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
+                                    Movimiento m1 = new Movimiento(obj.id, "Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
                                     movimientos.Add(m1);
                                     obj.movimientos.Add(m1);
                                 }
@@ -538,7 +542,7 @@ namespace ProyectoBanco1
                                 int idNuevoMov =  DB.agregarMovimiento(obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
                                 if (idNuevoMov != -1)
                                 {
-                                    Movimiento m1 = new Movimiento(idNuevoMov, obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
+                                    Movimiento m1 = new Movimiento(obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
                                     movimientos.Add(m1);
                                     obj.movimientos.Add(m1);
                                 }
@@ -714,7 +718,7 @@ namespace ProyectoBanco1
                                     int idNuevoMov = DB.agregarMovimiento(obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
                                     if (idNuevoMov != -1)
                                     {
-                                        Movimiento m1 = new Movimiento(idNuevoMov, obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
+                                        Movimiento m1 = new Movimiento(obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
                                         movimientos.Add(m1);
                                         obj2.movimientos.Add(m1);
                                     }
@@ -791,32 +795,32 @@ namespace ProyectoBanco1
         //Mostrar todos los plazos fijos que posee el Banco (Listar)
         public List<PlazoFijo> obtenerPlazosFijos()
         {
-            return pfs.ToList();
+            return contexto.pfs.ToList();
         }
 
 
         //Mostrar todos los usuarios que posee el Banco (Listar)
         public List<Usuario> obtenerUsuarios()
         {
-            return usuarios.ToList();
+            return contexto.usuarios.ToList();
         }
 
         //Mostrar todas las Cajas de Ahorro que posee el Banco (Listar
         public List<CajaDeAhorro> obtenerCajas()
         {
-            return usuarioActual.cajas.ToList();
+            return contexto.cajas.ToList();
         }
 
         //Mostrar todas las movimientos que tiene la Caja de Ahorro que pase por parametro (Listar)
         public List<Movimiento> obtenerMovimientos()
         {
-            return movimientos.ToList();
+            return contexto.movimientos.ToList();
         }
 
         //Mostrar todos los pagos que posee el Banco (Listar)
         public List<Pago> obtenerPagos()
         {
-            return pagos.ToList();
+            return contexto.pagos.ToList();
         } 
     }
 }

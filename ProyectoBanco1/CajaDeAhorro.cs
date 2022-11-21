@@ -19,12 +19,10 @@ namespace ProyectoBanco1
 
         public CajaDeAhorro(){}
 
-        public CajaDeAhorro(int id, int cbu, double saldo)
+        public CajaDeAhorro(int cbu, double saldo)
         {
-            this.id = id;
             this.cbu = cbu;
             this.saldo = saldo;
-
         }
         public override string ToString()
         {
