@@ -148,26 +148,27 @@ namespace ProyectoBanco1
         public bool depositar(int idCaja, double monto)
         {
             DateTime fecha = DateTime.Now;
-            int idNuevoMov = -1;
-            foreach (CajaDeAhorro caja in cajas)
+            try
             {
-                if (caja.id == idCaja)
-                {
-                    caja.saldo += monto;
-                    DB.modificarCaja(idCaja, caja.saldo);
+                CajaDeAhorro caja = contexto.cajas.Where(c => c.id == idCaja).FirstOrDefault();
+                if (caja == null) return false;
 
-                    idNuevoMov = DB.agregarMovimiento(idCaja, "Deposito de $" + monto, monto, fecha);
-                    if (idNuevoMov != -1)
-                    {
-                        Movimiento movimiento = new Movimiento(idNuevoMov, idCaja, "Deposito de $" + monto, monto, fecha);
-                        movimientos.Add(movimiento);
-                        caja.movimientos.Add(movimiento);
-                    }
-                    return true;
-                }
+                caja.saldo += monto;
+                contexto.cajas.Update(caja);
+                contexto.SaveChanges();
+
+                Movimiento mov = new Movimiento(idCaja, "Deposito" + monto, monto, fecha);
+                contexto.movimientos.Add(mov);
+                contexto.SaveChanges();
+                
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
             }
 
-            return false;
         }
         //Retirar dinero de la caja de ahorro seleccionada, siempre que tenga saldo suficiente
         public bool retirar(int idCaja, double monto)
@@ -186,7 +187,7 @@ namespace ProyectoBanco1
                         idNuevoMov = DB.agregarMovimiento(idCaja, "Extracción de $" + monto, monto, fecha);
                         if (idNuevoMov != -1)
                         {
-                            Movimiento movimiento = new Movimiento(idNuevoMov, idCaja, "Extracción de $" + monto, monto, fecha);
+                            Movimiento movimiento = new Movimiento(idCaja, "Extracción de $" + monto, monto, fecha);
                             movimientos.Add(movimiento);
                             caja.movimientos.Add(movimiento);
                         }
@@ -229,7 +230,7 @@ namespace ProyectoBanco1
                                 idNuevoMov = DB.agregarMovimiento(origen.id, detalleOrigen, monto, fecha);
                                 if (idNuevoMov != -1)
                                 {
-                                    Movimiento movimiento = new Movimiento(idNuevoMov, origen.id, detalleOrigen, monto, fecha);
+                                    Movimiento movimiento = new Movimiento(origen.id, detalleOrigen, monto, fecha);
                                     movimientos.Add(movimiento);
                                     origen.movimientos.Add(movimiento);
                                 }
@@ -237,7 +238,7 @@ namespace ProyectoBanco1
                                 idNuevoMov = DB.agregarMovimiento(destino.id, detalleDestino, monto, fecha);
                                 if (idNuevoMov != -1)
                                 {
-                                    Movimiento movimiento = new Movimiento(idNuevoMov, destino.id, detalleDestino, monto, fecha);
+                                    Movimiento movimiento = new Movimiento(destino.id, detalleDestino, monto, fecha);
                                     movimientos.Add(movimiento);
                                     destino.movimientos.Add(movimiento);
                                 }
@@ -457,7 +458,7 @@ namespace ProyectoBanco1
                                 int idNuevoMov = DB.agregarMovimiento(obj.id,"Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
                                 if (idNuevoMov != -1)
                                 {
-                                    Movimiento m1 = new Movimiento(idNuevoMov, obj.id, "Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
+                                    Movimiento m1 = new Movimiento(obj.id, "Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
                                     movimientos.Add(m1);
                                     obj.movimientos.Add(m1);
                                 }
@@ -538,7 +539,7 @@ namespace ProyectoBanco1
                                 int idNuevoMov =  DB.agregarMovimiento(obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
                                 if (idNuevoMov != -1)
                                 {
-                                    Movimiento m1 = new Movimiento(idNuevoMov, obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
+                                    Movimiento m1 = new Movimiento(obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
                                     movimientos.Add(m1);
                                     obj.movimientos.Add(m1);
                                 }
@@ -714,7 +715,7 @@ namespace ProyectoBanco1
                                     int idNuevoMov = DB.agregarMovimiento(obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
                                     if (idNuevoMov != -1)
                                     {
-                                        Movimiento m1 = new Movimiento(idNuevoMov, obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
+                                        Movimiento m1 = new Movimiento(obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
                                         movimientos.Add(m1);
                                         obj2.movimientos.Add(m1);
                                     }
@@ -791,32 +792,32 @@ namespace ProyectoBanco1
         //Mostrar todos los plazos fijos que posee el Banco (Listar)
         public List<PlazoFijo> obtenerPlazosFijos()
         {
-            return pfs.ToList();
+            return contexto.pfs.ToList();
         }
 
 
         //Mostrar todos los usuarios que posee el Banco (Listar)
         public List<Usuario> obtenerUsuarios()
         {
-            return usuarios.ToList();
+            return contexto.usuarios.ToList();
         }
 
         //Mostrar todas las Cajas de Ahorro que posee el Banco (Listar
         public List<CajaDeAhorro> obtenerCajas()
         {
-            return usuarioActual.cajas.ToList();
+            return contexto.cajas.ToList();
         }
 
         //Mostrar todas las movimientos que tiene la Caja de Ahorro que pase por parametro (Listar)
         public List<Movimiento> obtenerMovimientos()
         {
-            return movimientos.ToList();
+            return contexto.movimientos.ToList();
         }
 
         //Mostrar todos los pagos que posee el Banco (Listar)
         public List<Pago> obtenerPagos()
         {
-            return pagos.ToList();
+            return contexto.pagos.ToList();
         } 
     }
 }

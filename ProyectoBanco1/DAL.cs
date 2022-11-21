@@ -728,7 +728,6 @@ namespace ProyectoBanco1
                     while (reader.Read())
                     {
                         nuevoMov = new Movimiento(
-                            reader.GetInt32(0),     //id
                             reader.GetInt32(1),     //idCaja
                             reader.GetString(2),    //detalle
                             reader.GetDouble(3),    //monto
