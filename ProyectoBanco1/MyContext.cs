@@ -166,14 +166,18 @@ namespace ProyectoBanco1
 
 
             modelBuilder.Entity<Usuario>().HasData(
-                new { id = 1, dni = 123, nombre = "admin", apellido = "admin", mail = "admin@admin.com", password = "123", intentosFallidos = 0, bloqueado = false, esAdmin = true });
+                new { id = 1, dni = 123, nombre = "admin", apellido = "admin", mail = "admin@admin.com", password = "123", intentosFallidos = 0, bloqueado = false, esAdmin = true },
+                new { id = 2, dni = 36522030, nombre = "Matias", apellido = "Gomez", mail = "matias_gomez05@hotmail.com", password = "123", intentosFallidos = 0, bloqueado = false, esAdmin = false }
+            );
             modelBuilder.Entity<UsuarioCaja>().HasData(
                 new { id = 1, idUsuario = 1, idCaja = 1 },
-                new { id = 2, idUsuario = 1, idCaja = 2 }
+                new { id = 2, idUsuario = 1, idCaja = 2 },
+                new { id = 3, idUsuario = 2, idCaja = 3 }
             );
             modelBuilder.Entity<CajaDeAhorro>().HasData(
                 new { id = 1, cbu = 7000001, saldo = 20000.0 },
-                new { id = 2, cbu = 7000002, saldo = 15000.0 }
+                new { id = 2, cbu = 7000002, saldo = 15000.0 },
+                new { id = 3, cbu = 7000003, saldo = 10000.0 }
             );
             /*
             modelBuilder.Entity<Movimiento>().HasData(

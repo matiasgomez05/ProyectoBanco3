@@ -477,7 +477,6 @@ namespace ProyectoBanco1
                     while (reader.Read())
                     {
                         nuevaCaja = new CajaDeAhorro(
-                            reader.GetInt32(0),     //id
                             reader.GetInt32(1),     //cbu
                             reader.GetDouble(2));   //saldo
 
@@ -599,7 +598,6 @@ namespace ProyectoBanco1
                     while (reader.Read())
                     {
                         nuevaCaja = new UsuarioCaja(
-                            reader.GetInt32(0),     //id
                             reader.GetInt32(1),     //idU
                             reader.GetInt32(2));   //idC
 

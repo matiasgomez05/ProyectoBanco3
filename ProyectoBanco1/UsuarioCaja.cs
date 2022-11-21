@@ -17,9 +17,8 @@ namespace ProyectoBanco1
 
 
         public UsuarioCaja() { }
-        public UsuarioCaja(int id, int idU, int idC)
+        public UsuarioCaja(int idU, int idC)
         {
-            this.id = id;
             this.idUsuario = idU;
             this.idCaja = idC;
         }

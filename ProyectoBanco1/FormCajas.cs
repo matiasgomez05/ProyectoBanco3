@@ -119,7 +119,7 @@ namespace ProyectoBanco1
             dataGridView1.Rows.Clear();
             dataGridView2.Rows.Clear();
 
-            foreach (CajaDeAhorro caja in banco.obtenerCajas())
+            foreach (CajaDeAhorro caja in banco.usuarioActual.cajas.ToList())
             {
                 dataGridView1.Rows.Add(caja.id, caja.cbu, caja.saldo);
             }
