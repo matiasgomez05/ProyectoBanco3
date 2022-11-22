@@ -127,6 +127,7 @@
             this.button5.Text = "Usuarios";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Visible = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // FormInicio
             // 
@@ -145,6 +146,7 @@
             this.Name = "FormInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio";
+            this.Load += new System.EventHandler(this.FormInicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
