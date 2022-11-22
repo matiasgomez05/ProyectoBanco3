@@ -789,7 +789,7 @@ namespace ProyectoBanco1
         //Mostrar todas las tarjetas de credito que posee el Banco (Listar)
         public List<TarjetaDeCredito> obtenerTarjetasDeCredito()
         {
-            return tarjetas.ToList();
+            return contexto.tarjetas.ToList();
         }
 
 
