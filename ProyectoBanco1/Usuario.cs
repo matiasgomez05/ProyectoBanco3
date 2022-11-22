@@ -27,9 +27,8 @@ namespace ProyectoBanco1
         
 
         public Usuario() { }
-        public Usuario(int id, int dni, string nombre, string apellido, string mail, string password, int intentosFallidos, bool bloqueado, bool esAdmin)
+        public Usuario(int dni, string nombre, string apellido, string mail, string password, int intentosFallidos, bool bloqueado, bool esAdmin)
         {
-            this.id = id;
             this.dni = dni;
             this.nombre = nombre;
             this.apellido = apellido;
@@ -38,7 +37,6 @@ namespace ProyectoBanco1
             this.intentosFallidos = intentosFallidos;
             this.bloqueado = bloqueado;
             this.esAdmin = esAdmin;
-
         }
         public override string ToString()
         {

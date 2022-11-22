@@ -172,7 +172,8 @@ namespace ProyectoBanco1
             modelBuilder.Entity<UsuarioCaja>().HasData(
                 new { id = 1, idUsuario = 1, idCaja = 1 },
                 new { id = 2, idUsuario = 1, idCaja = 2 },
-                new { id = 3, idUsuario = 2, idCaja = 3 }
+                new { id = 3, idUsuario = 2, idCaja = 2 },
+                new { id = 4, idUsuario = 2, idCaja = 3 }
             );
             modelBuilder.Entity<CajaDeAhorro>().HasData(
                 new { id = 1, cbu = 7000001, saldo = 20000.0 },

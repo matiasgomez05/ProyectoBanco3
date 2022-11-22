@@ -60,6 +60,38 @@ namespace ProyectoBanco1
         {
             
         }
+
+        //Modificar
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            int idCaja = int.Parse(dataGridView1.Rows[selectedIndex].Cells[0].Value.ToString());
+            int nuevoCbu = int.Parse(textBox4.Text);
+            int nuevoTitular = int.Parse(textBox5.Text);
+
+            if (selectedIndex > -1)
+            {
+                banco.modificarCajaAhorro(idCaja, nuevoCbu, nuevoTitular);
+                recargar();
+            }
+        }
+
+        //Quitar titular
+        private void button9_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            int idCaja = int.Parse(dataGridView1.Rows[selectedIndex].Cells[0].Value.ToString());
+
+            int selectedCombo = comboBox3.SelectedIndex;
+            int quitarTitular = int.Parse(comboBox3.Items[selectedCombo].ToString());
+
+            if (selectedIndex > -1)
+            {
+                banco.eliminarTitular(idCaja, quitarTitular);
+                recargar();
+            }
+        }
+
         //Depositar
         private void button4_Click(object sender, EventArgs e)
         {
@@ -106,12 +138,28 @@ namespace ProyectoBanco1
             label5.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
             label7.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
             label9.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
+            textBox4.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
 
             comboBox1.Items.Clear();
+            comboBox3.Items.Clear();
+
+            int cajaSeccionada = int.Parse(dataGridView1.Rows[selectedIndex].Cells[0].Value.ToString());
+            int titulares = 0;
             foreach (CajaDeAhorro caja in banco.obtenerCajas())
             {
                 if (label7.Text != caja.cbu.ToString()) comboBox1.Items.Add(caja.cbu);
+                if(cajaSeccionada == caja.id)
+                {
+                    foreach (Usuario usuario in caja.titulares)
+                    {
+                        titulares++; 
+                        comboBox3.Items.Add(usuario.dni);
+                    }
+
+                }
             }
+            if (titulares > 1) { button9.Enabled = true; } else { button9.Enabled = false; } 
+
         }
         //Recarga la informacion del programa luego de realizar una accion
         private void recargar()
@@ -134,6 +182,8 @@ namespace ProyectoBanco1
             textBox1.Text = "0";
             textBox2.Text = "0";
             textBox3.Text = "0";
+            comboBox1.SelectedIndex = -1;
+            comboBox3.SelectedIndex = -1;
         }
 
         private void FormCajas_Load(object sender, EventArgs e)
@@ -151,6 +201,7 @@ namespace ProyectoBanco1
             
         }
 
+        //Vista de movimientos
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
             dataGridView2.Rows.Clear();
@@ -163,5 +214,6 @@ namespace ProyectoBanco1
                 }
             }
         }
+        
     }
 }
