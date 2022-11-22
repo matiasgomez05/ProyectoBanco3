@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Juan\\Source\\Repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {}
+    "C:\\Users\\Juan\\source\\repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Juan\\Source\\Repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {
+    "C:\\Users\\Juan\\source\\repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Juan\\Source\\Repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
+        "projectUniqueName": "C:\\Users\\Juan\\source\\repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
         "projectName": "ProyectoBanco1",
-        "projectPath": "C:\\Users\\Juan\\Source\\Repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
+        "projectPath": "C:\\Users\\Juan\\source\\repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
         "packagesPath": "C:\\Users\\Juan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Juan\\Source\\Repos\\ProyectoBanco3\\ProyectoBanco1\\obj\\",
+        "outputPath": "C:\\Users\\Juan\\source\\repos\\ProyectoBanco3\\ProyectoBanco1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oEER2VwbfXcCMivcIv84bl1PxHoPhXA8+8jxVLvUP5TK/CKxpUHQKS85pZi1dIn+aghHLp+LWq4RApCNahq7RA==",
+  "dgSpecHash": "Qxn+kr0H2LVXrotpJk3QaUGR2v8Pl8jkkf+R0GtXXH18q+4WGzPFD4e0Iqukcsu0XWEzvDZQAKgtmifqFcCllg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Juan\\Source\\Repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
+  "projectFilePath": "C:\\Users\\Juan\\source\\repos\\ProyectoBanco3\\ProyectoBanco1\\ProyectoBanco1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Juan\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Juan\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
