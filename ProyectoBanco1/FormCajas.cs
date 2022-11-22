@@ -133,32 +133,7 @@ namespace ProyectoBanco1
         //Recarga la informacion del programa al seleccionar cada celda
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedIndex = dataGridView1.CurrentRow.Index;
-            label1.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
-            label5.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
-            label7.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
-            label9.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
-            textBox4.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
-
-            comboBox1.Items.Clear();
-            comboBox3.Items.Clear();
-
-            int cajaSeccionada = int.Parse(dataGridView1.Rows[selectedIndex].Cells[0].Value.ToString());
-            int titulares = 0;
-            foreach (CajaDeAhorro caja in banco.obtenerCajas())
-            {
-                if (label7.Text != caja.cbu.ToString()) comboBox1.Items.Add(caja.cbu);
-                if(cajaSeccionada == caja.id)
-                {
-                    foreach (Usuario usuario in caja.titulares)
-                    {
-                        titulares++; 
-                        comboBox3.Items.Add(usuario.dni);
-                    }
-
-                }
-            }
-            if (titulares > 1) { button9.Enabled = true; } else { button9.Enabled = false; } 
+           
 
         }
         //Recarga la informacion del programa luego de realizar una accion
@@ -211,19 +186,52 @@ namespace ProyectoBanco1
             
         }
 
-        //Vista de movimientos
+        
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
+           
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentRow.Index;
+            label1.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
+            label5.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
+            label7.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
+            label9.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
+            textBox4.Text = dataGridView1.Rows[selectedIndex].Cells[1].Value.ToString();
+
+            comboBox1.Items.Clear();
+            comboBox3.Items.Clear();
+
+            int cajaSeccionada = int.Parse(dataGridView1.Rows[selectedIndex].Cells[0].Value.ToString());
+            int titulares = 0;
+            foreach (CajaDeAhorro caja in banco.obtenerCajas())
+            {
+                if (label7.Text != caja.cbu.ToString()) comboBox1.Items.Add(caja.cbu);
+                if (cajaSeccionada == caja.id)
+                {
+                    foreach (Usuario usuario in caja.titulares)
+                    {
+                        titulares++;
+                        comboBox3.Items.Add(usuario.dni);
+                    }
+
+                }
+            }
+            if (titulares > 1) { button9.Enabled = true; } else { button9.Enabled = false; }
+
+
+            //Vista de movimientos
             dataGridView2.Rows.Clear();
             foreach (var mov in banco.obtenerMovimientos())
             {
-                int selectedIndex = dataGridView1.CurrentRow.Index;
-                if (mov.idCaja == (Int32.Parse(dataGridView1.Rows[selectedIndex].Cells[0].Value.ToString())))
+                int selectedIndex1 = dataGridView1.CurrentRow.Index;
+                if (mov.idCaja == (Int32.Parse(dataGridView1.Rows[selectedIndex1].Cells[0].Value.ToString())))
                 {
                     dataGridView2.Rows.Add(mov.id, mov.detalle, mov.monto, mov.fecha);
                 }
             }
         }
-        
     }
 }

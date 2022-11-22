@@ -55,6 +55,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -245,7 +247,7 @@
             this.dataGridView2.ShowRowErrors = false;
             this.dataGridView2.Size = new System.Drawing.Size(305, 419);
             this.dataGridView2.TabIndex = 20;
-            //
+            // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "id";
@@ -301,6 +303,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(167, 23);
             this.comboBox2.TabIndex = 26;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // checkBox1
             // 
@@ -334,8 +337,8 @@
             this.comboBox1.TabIndex = 31;
             this.comboBox1.Visible = false;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
-            //  
-            //  label6
+            // 
+            // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -344,12 +347,35 @@
             this.label6.Size = new System.Drawing.Size(278, 20);
             this.label6.TabIndex = 32;
             this.label6.Text = "Para ver pagos, debe elegir ID usuario: ";
-            //  
+            this.label6.Visible = false;
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(295, 655);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 15);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Titular:";
+            this.label7.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(346, 655);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(0, 15);
+            this.label8.TabIndex = 34;
+            this.label8.Visible = false;
+            // 
             // FormPagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.checkBox2);
@@ -414,5 +440,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private ComboBox comboBox1;
         private Label label6;
+        private Label label7;
+        private Label label8;
     }
 }

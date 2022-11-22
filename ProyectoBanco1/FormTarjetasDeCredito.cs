@@ -36,8 +36,10 @@ namespace ProyectoBanco1
             
                 if (banco.usuarioActual.esAdmin)
                 {
+                    dataGridView1.Columns[5].Visible = true;
+                    dataGridView1.Columns[6].Visible = true;
 
-                    foreach (var obj2 in banco.obtenerCajas())
+                foreach (var obj2 in banco.obtenerCajas())
                     {
 
                     comboBox1.Items.Add(obj2.cbu);
@@ -47,10 +49,21 @@ namespace ProyectoBanco1
                     foreach (var obj in banco.obtenerTarjetasDeCredito())
                     {
 
-                    dataGridView1.Rows.Add(obj.id, obj.numero, obj.codigoV, obj.limite, obj.consumos);
+                     foreach (var obj2 in banco.obtenerUsuarios())
+                            {
+                                if (obj2.id == obj.idTitular)
+                                {
 
+                                    string nombretit = obj2.nombre + " " + obj2.apellido;
+                                    dataGridView1.Rows.Add(obj.id, obj.numero, obj.codigoV, obj.limite, obj.consumos, obj.idTitular, nombretit);
+                                    
+                                }
+                            }
+                        
                     }
+
                 }
+                
                 else
                 {
                     foreach (var obj2 in banco.usuarioActual.cajas)
@@ -124,6 +137,9 @@ namespace ProyectoBanco1
             button4.Visible = true;
             button3.Visible = true;
             comboBox1.Visible = true;
+
+
+
         }
 
         private void FormTarjetasDeCredito_Load(object sender, EventArgs e)
@@ -133,7 +149,29 @@ namespace ProyectoBanco1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (banco.usuarioActual.esAdmin)
+            {
+                label3.Visible = true;
+                label4.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
 
+                
+                
+                foreach(var obj2 in banco.obtenerCajas())
+                {
+                    if(int.Parse(comboBox1.Text) == obj2.cbu)
+                    {
+                        foreach (var obj in obj2.titulares)
+                        {
+                            label4.Text = obj.nombre + " "+ obj.apellido;
+                            label5.Text = obj.id.ToString();
+
+                        }
+                    }
+                    
+                 }
+            }
         }
     }
 }

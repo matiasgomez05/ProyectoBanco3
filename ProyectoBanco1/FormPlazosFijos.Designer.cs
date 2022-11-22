@@ -39,12 +39,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaini = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechafin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label6 = new System.Windows.Forms.Label();
+            this.idTit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,7 +170,9 @@
             this.cbu,
             this.monto,
             this.fechaini,
-            this.fechafin});
+            this.fechafin,
+            this.idTit,
+            this.nombre});
             this.dataGridView1.Location = new System.Drawing.Point(47, 138);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -183,24 +187,38 @@
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label6.Location = new System.Drawing.Point(216, 100);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(206, 25);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Listado de Plazos fijos";
+            // 
             // id
             // 
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Width = 40;
             // 
             // cbu
             // 
             this.cbu.HeaderText = "cbu";
             this.cbu.Name = "cbu";
             this.cbu.ReadOnly = true;
+            this.cbu.Width = 150;
             // 
             // monto
             // 
-            this.monto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.monto.HeaderText = "Monto";
             this.monto.Name = "monto";
             this.monto.ReadOnly = true;
+            this.monto.Width = 153;
             // 
             // fechaini
             // 
@@ -214,17 +232,19 @@
             this.fechafin.Name = "fechafin";
             this.fechafin.ReadOnly = true;
             // 
-            // label6
+            // idTit
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label6.Location = new System.Drawing.Point(216, 100);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(206, 25);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Listado de Plazos fijos";
+            this.idTit.HeaderText = "IdTit";
+            this.idTit.Name = "idTit";
+            this.idTit.ReadOnly = true;
+            this.idTit.Visible = false;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre y apelldio";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.Visible = false;
             // 
             // FormPlazosFijos
             // 
@@ -267,11 +287,13 @@
         private Label label4;
         private Label label5;
         private DataGridView dataGridView1;
+        private Label label6;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn cbu;
         private DataGridViewTextBoxColumn monto;
         private DataGridViewTextBoxColumn fechaini;
         private DataGridViewTextBoxColumn fechafin;
-        private Label label6;
+        private DataGridViewTextBoxColumn idTit;
+        private DataGridViewTextBoxColumn nombre;
     }
 }

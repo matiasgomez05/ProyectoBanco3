@@ -103,5 +103,10 @@ namespace ProyectoBanco1
             }
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            banco.eliminarUsuario(idUser);
+        }
     }
 }

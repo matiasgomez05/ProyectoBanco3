@@ -37,7 +37,6 @@
             this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bloqueado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -141,18 +140,6 @@
             this.checkBox1.Text = "Vista Admin";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.Crimson;
-            this.button2.Location = new System.Drawing.Point(737, 507);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 40);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Desbloquear";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -169,12 +156,13 @@
             // 
             this.button4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button4.ForeColor = System.Drawing.Color.Crimson;
-            this.button4.Location = new System.Drawing.Point(737, 570);
+            this.button4.Location = new System.Drawing.Point(737, 532);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(155, 40);
             this.button4.TabIndex = 19;
             this.button4.Text = "Eliminar";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox1
             // 
@@ -234,7 +222,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.label2);
@@ -261,7 +248,6 @@
         private DataGridViewTextBoxColumn apellido;
         private DataGridViewTextBoxColumn dni;
         private DataGridViewTextBoxColumn bloqueado;
-        private Button button2;
         private Button button3;
         private Button button4;
         private TextBox textBox1;
