@@ -254,21 +254,24 @@ namespace ProyectoBanco1
         {
             //Lo agrego solo si el DNI no está duplicado
             bool existe = false;
-            foreach (Usuario usuario in usuarios)
+            foreach (Usuario usuario in obtenerUsuarios())
             {
                 if (usuario.dni == dni) existe = true;
             }
 
             if (!existe)
             {
-                int idNuevo = DB.agregarUsuario(dni, nombre, apellido, mail, password, intentosFallidos, bloqueado, esAdmin);
-                if (idNuevo != -1)
+                try
                 {
-                    usuarios.Add(new Usuario(idNuevo, dni, nombre, apellido, mail, password, intentosFallidos, bloqueado, esAdmin));
+                    Usuario nuevoUsuario = new Usuario(dni, nombre, apellido, mail, password, intentosFallidos, bloqueado, esAdmin);
+                    contexto.usuarios.Add(nuevoUsuario);
+
+                    contexto.SaveChanges();
                     return true;
                 }
-                else
+                catch(Exception e)
                 {
+                    Console.WriteLine(e);
                     return false;
                 }
             }
@@ -371,11 +374,59 @@ namespace ProyectoBanco1
         }
 
         //Modificar la caja de ahorro del usuario en cuestion 
-        public void modificarCajaAhorro(int dni)
+        public bool modificarCajaAhorro(int idCaja, int cbu, int dni)
         {
+            try
+            {
+                CajaDeAhorro caja = contexto.cajas.Where(c => c.id == idCaja).FirstOrDefault();
+                if (caja == null) return false;
 
+                caja.cbu = cbu;
+
+                if (dni > 0)
+                {
+                    Usuario usr = contexto.usuarios.Where(u => u.dni == dni).FirstOrDefault();
+                    if (usr != null)
+                    {
+                        caja.titulares.Add(usr);
+                    }
+                }
+
+                contexto.cajas.Update(caja);
+                contexto.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
+        //Eliminar un titular de la caja de ahorro
+        public bool eliminarTitular(int idCaja, int dni)
+        {
+            try
+            {
+                CajaDeAhorro caja = contexto.cajas.Where(c => c.id == idCaja).FirstOrDefault();
+                if (caja == null) return false;
+
+                Usuario usr = contexto.usuarios.Where(u => u.dni == dni).FirstOrDefault();
+                if (usr != null)
+                {
+                    caja.titulares.Remove(usr);
+                }
+
+                contexto.cajas.Update(caja);
+                contexto.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
 
         /*
          * ABM Tarjetas de Credito

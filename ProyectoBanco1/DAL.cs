@@ -40,7 +40,6 @@ namespace ProyectoBanco1
                     while (reader.Read())
                     {
                         nuevoUsuario = new Usuario(
-                            reader.GetInt32(0),     //id
                             reader.GetInt32(1),     //dni
                             reader.GetString(2),    //nombre
                             reader.GetString(3),    //apellido

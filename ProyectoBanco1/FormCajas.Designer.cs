@@ -42,10 +42,10 @@
             this.button8 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.button9 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -225,10 +225,10 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.textBox5);
             this.tabPage4.Controls.Add(this.label12);
             this.tabPage4.Controls.Add(this.comboBox3);
             this.tabPage4.Controls.Add(this.button9);
-            this.tabPage4.Controls.Add(this.comboBox2);
             this.tabPage4.Controls.Add(this.label11);
             this.tabPage4.Controls.Add(this.label10);
             this.tabPage4.Controls.Add(this.textBox4);
@@ -241,6 +241,14 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Modificar";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(335, 42);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(112, 23);
+            this.textBox5.TabIndex = 24;
+            this.textBox5.Text = "0";
             // 
             // label12
             // 
@@ -263,6 +271,7 @@
             // 
             // button9
             // 
+            this.button9.Enabled = false;
             this.button9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button9.ForeColor = System.Drawing.Color.Crimson;
             this.button9.Location = new System.Drawing.Point(312, 85);
@@ -273,25 +282,16 @@
             this.button9.Text = "Quitar";
             this.button9.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.button9.UseVisualStyleBackColor = true;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(312, 42);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(158, 23);
-            this.comboBox2.TabIndex = 20;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(228, 45);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 15);
+            this.label11.Size = new System.Drawing.Size(101, 15);
             this.label11.TabIndex = 16;
-            this.label11.Text = "Nuevo Titular";
+            this.label11.Text = "DNI Nuevo Titular";
             // 
             // label10
             // 
@@ -329,6 +329,7 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // tabPage1
             // 
@@ -616,7 +617,6 @@
         private Button button2;
         private Label label9;
         private Button button9;
-        private ComboBox comboBox2;
         private Label label11;
         private Label label10;
         private TextBox textBox4;
@@ -629,5 +629,6 @@
         private DataGridViewTextBoxColumn detalle;
         private DataGridViewTextBoxColumn monto;
         private DataGridViewTextBoxColumn fecha;
+        private TextBox textBox5;
     }
 }
