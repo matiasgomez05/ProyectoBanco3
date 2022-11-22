@@ -724,13 +724,12 @@ namespace ProyectoBanco1
         // verificar pagos de plazo fijo
         public bool verificarPf(int id, int cbu)
         {
-
-            DateTime fechaAnt = new DateTime(2008, 1, 2);
             foreach (var obj in obtenerPlazosFijos())
             {
                 if (obj.id == id)
                 {
-                    if (obj.fechaFin <= obj.fechaIni.AddDays(30))
+                    DateTime fechaPlazo = DateTime.Now;
+                    if (obj.fechaFin <= fechaPlazo)
                     {
                         obj.pagado = true;
                         foreach (var obj2 in obtenerCajas())
@@ -759,11 +758,6 @@ namespace ProyectoBanco1
                             }
                         }
                     }
-                    else if (obj.fechaFin < fechaAnt)
-                    {
-                        MessageBox.Show("error en fecha, todavia no se cumplio el plazo");
-                        return false;
-                    }
                 }
 
 
@@ -775,7 +769,7 @@ namespace ProyectoBanco1
         {
             if (verificarPf(id, idCaja) == true)
             {
-                foreach (var obj in usuarioActual.pfs.ToList())
+                foreach (var obj in obtenerPlazosFijos())
                 {
                     if (id == obj.id && obj.pagado == true)
                     {
@@ -788,7 +782,7 @@ namespace ProyectoBanco1
             }
             else
             {
-                MessageBox.Show("No se cumplio el plazo,error");
+                MessageBox.Show("No se cumplio el plazo");
             }
 
         }
