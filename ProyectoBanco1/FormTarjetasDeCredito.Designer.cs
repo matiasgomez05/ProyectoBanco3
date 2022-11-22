@@ -36,6 +36,8 @@
             this.cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.limite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.consumos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idTitular = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombretit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -44,6 +46,10 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +86,9 @@
             this.num,
             this.cod,
             this.limite,
-            this.consumos});
+            this.consumos,
+            this.idTitular,
+            this.nombretit});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(56, 117);
             this.dataGridView1.MultiSelect = false;
@@ -130,6 +138,20 @@
             this.consumos.HeaderText = "Consumos";
             this.consumos.Name = "consumos";
             this.consumos.ReadOnly = true;
+            // 
+            // idTitular
+            // 
+            this.idTitular.HeaderText = "IdTit";
+            this.idTitular.Name = "idTitular";
+            this.idTitular.ReadOnly = true;
+            this.idTitular.Visible = false;
+            // 
+            // nombretit
+            // 
+            this.nombretit.HeaderText = "Nombre y apellido";
+            this.nombretit.Name = "nombretit";
+            this.nombretit.ReadOnly = true;
+            this.nombretit.Visible = false;
             // 
             // button2
             // 
@@ -181,7 +203,6 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(727, 152);
             this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
             this.textBox2.PlaceholderText = "Codigo";
             this.textBox2.Size = new System.Drawing.Size(155, 23);
             this.textBox2.TabIndex = 10;
@@ -216,11 +237,55 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Listado de Tarjetas de Credito";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(727, 325);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(20, 15);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "id:";
+            this.label6.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(771, 325);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 15);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "label5";
+            this.label5.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(771, 306);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 15);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "label4";
+            this.label4.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(727, 306);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 15);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Titular:";
+            this.label3.Visible = false;
+            // 
             // FormTarjetasDeCredito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox3);
@@ -248,11 +313,6 @@
         private Button button1;
         private Label label2;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn num;
-        private DataGridViewTextBoxColumn cod;
-        private DataGridViewTextBoxColumn limite;
-        private DataGridViewTextBoxColumn consumos;
         private Button button2;
         private Button button3;
         private Button button4;
@@ -261,5 +321,16 @@
         private TextBox textBox3;
         private ComboBox comboBox1;
         private Label label1;
+        private DataGridViewTextBoxColumn id;
+        private DataGridViewTextBoxColumn num;
+        private DataGridViewTextBoxColumn cod;
+        private DataGridViewTextBoxColumn limite;
+        private DataGridViewTextBoxColumn consumos;
+        private DataGridViewTextBoxColumn idTitular;
+        private DataGridViewTextBoxColumn nombretit;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label3;
     }
 }

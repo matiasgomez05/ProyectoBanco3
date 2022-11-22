@@ -57,6 +57,9 @@ namespace ProyectoBanco1
             if (banco.usuarioActual.esAdmin)
             {
 
+                dataGridView1.Columns[5].Visible = true;
+                dataGridView1.Columns[6].Visible = true;
+
                 foreach (var obj2 in banco.obtenerCajas())
                 {
                     comboBox1.Items.Add(obj2.cbu);
@@ -64,7 +67,7 @@ namespace ProyectoBanco1
 
                 foreach (var obj in banco.obtenerPlazosFijos())
                 {
-                    dataGridView1.Rows.Add(obj.id, obj.cbu, "$" + obj.monto, obj.fechaIni.ToShortDateString(), obj.fechaFin.ToShortDateString());
+                    dataGridView1.Rows.Add(obj.id, obj.cbu, "$" + obj.monto, obj.fechaIni.ToShortDateString(), obj.fechaFin.ToShortDateString(), obj.titular.id, obj.titular.nombre + " " + obj.titular.apellido);
 
                 }
             }

@@ -167,38 +167,52 @@ namespace ProyectoBanco1
 
             modelBuilder.Entity<Usuario>().HasData(
                 new { id = 1, dni = 123, nombre = "admin", apellido = "admin", mail = "admin@admin.com", password = "123", intentosFallidos = 0, bloqueado = false, esAdmin = true },
-                new { id = 2, dni = 36522030, nombre = "Matias", apellido = "Gomez", mail = "matias_gomez05@hotmail.com", password = "123", intentosFallidos = 0, bloqueado = false, esAdmin = false }
+                new { id = 2, dni = 36522030, nombre = "Matias", apellido = "Gomez", mail = "matias_gomez05@hotmail.com", password = "123", intentosFallidos = 0, bloqueado = false, esAdmin = false },
+                new { id = 3, dni = 41883064, nombre = "Juan", apellido = "Saavedra", mail = "juansaavedra@gmail.com", password = "123", intentosFallidos = 0, bloqueado = false, esAdmin = false }
             );
             modelBuilder.Entity<UsuarioCaja>().HasData(
                 new { id = 1, idUsuario = 1, idCaja = 1 },
                 new { id = 2, idUsuario = 1, idCaja = 2 },
                 new { id = 3, idUsuario = 2, idCaja = 2 },
-                new { id = 4, idUsuario = 2, idCaja = 3 }
+                new { id = 4, idUsuario = 2, idCaja = 3 },
+                new { id = 5, idUsuario = 3, idCaja = 4 },
+                new { id = 6, idUsuario = 2, idCaja = 5 }
             );
             modelBuilder.Entity<CajaDeAhorro>().HasData(
                 new { id = 1, cbu = 7000001, saldo = 20000.0 },
                 new { id = 2, cbu = 7000002, saldo = 15000.0 },
-                new { id = 3, cbu = 7000003, saldo = 10000.0 }
+                new { id = 3, cbu = 7000003, saldo = 10000.0 },
+                new { id = 4, cbu = 7000004, saldo = 50000.0 },
+                new { id = 5, cbu = 7000005, saldo = 45200.0 }
             );
-            /*
+            
             modelBuilder.Entity<Movimiento>().HasData(
                 new { id = 1, idCaja = 1, detalle = "Abona Luz", monto = 2000.0, fecha = new DateTime(2022, 09, 21, 00, 00, 00, 000) },
                 new { id = 2, idCaja = 1, detalle = "Abona Gas", monto = 5500.0, fecha = new DateTime(2022, 10, 14, 00, 00, 00, 000) },
-                new { id = 3, idCaja = 2, detalle = "Extraccion", monto = 3000.0, fecha = new DateTime(2022, 11, 08, 00, 00, 00, 000) }
+                new { id = 3, idCaja = 2, detalle = "Extraccion", monto = 3000.0, fecha = new DateTime(2022, 11, 08, 00, 00, 00, 000) },
+                new { id = 4, idCaja = 3, detalle = "Extraccion", monto = 3000.0, fecha = new DateTime(2022, 11, 08, 00, 00, 00, 000) },
+                new { id = 5, idCaja = 4, detalle = "Nuevo pago : varios.", monto = 3000.0, fecha = new DateTime(2022, 11, 08, 00, 00, 00, 000) },
+                new { id = 6, idCaja = 5, detalle = "Pago tarjeta", monto = 3000.0, fecha = new DateTime(2022, 11, 08, 00, 00, 00, 000) }
             );
             modelBuilder.Entity<Pago>().HasData(
-                new { id = 1, idUsuario = 1, nombre = "Luz", monto = 2000.0, pagado = true, metodo = "Virtual" },
-                new { id = 2, idUsuario = 1, nombre = "Gas", monto = 5500.0, pagado = true, metodo = "Presencial" }
+                new { id = 1, idUsuario = 1, nombre = "Luz", monto = 2000.0, pagado = true, metodo = "Tarjeta de Credito" },
+                new { id = 2, idUsuario = 2, nombre = "Gas", monto = 5500.0, pagado = true, metodo = "Caja de Ahorro" },
+                new { id = 3, idUsuario = 2, nombre = "Abono movil", monto = 1000.0, pagado = false, metodo = "" },
+                new { id = 4, idUsuario = 3, nombre = "Telecentro", monto = 5500.0, pagado = false, metodo = "" },
+                new { id = 5, idUsuario = 3, nombre = "Luz", monto = 3000.0, pagado = false, metodo = "" }
             );
             modelBuilder.Entity<PlazoFijo>().HasData(
                 new { id = 1, idTitular = 1, monto = 2000.0, fechaIni = new DateTime(2022, 11, 03, 00, 00, 00, 000), fechaFin = new DateTime(2022, 12, 03, 00, 00, 00, 000), tasa = 70.4, pagado = false, cbu = 7000001 },
                 new { id = 2, idTitular = 1, monto = 5000.0, fechaIni = new DateTime(2022, 12, 03, 00, 00, 00, 000), fechaFin = new DateTime(2023, 01, 03, 00, 00, 00, 000), tasa = 70.5, pagado = false, cbu = 7000002 }
             );
             modelBuilder.Entity<TarjetaDeCredito>().HasData(
-                new { id = 1, idTitular = 1, numero = 1, codigoV = 1000001, limite = 5000.0, consumos = 0.0 },
-                new { id = 2, idTitular = 1, numero = 2, codigoV = 1000002, limite = 7000.0, consumos = 0.0 }
+                new { id = 1, idTitular = 1, numero = 12312, codigoV = 10001, limite = 5000.0, consumos = 550.0 },
+                new { id = 2, idTitular = 2, numero = 45645, codigoV = 10002, limite = 7000.0, consumos = 1000.0 },
+                new { id = 3, idTitular = 2, numero = 78978, codigoV = 10002, limite = 3000.0, consumos = 0.0 },
+                new { id = 4, idTitular = 3, numero = 14785, codigoV = 10002, limite = 6000.0, consumos = 0.0 },
+                new { id = 5, idTitular = 3, numero = 36985, codigoV = 10002, limite = 2000.0, consumos = 0.0 }
             );
-            */
+            
         }
 
     }

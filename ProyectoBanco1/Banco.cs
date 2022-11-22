@@ -22,7 +22,7 @@ namespace ProyectoBanco1
 
         private MyContext contexto;
 
-        private DAL DB;
+        //private DAL DB;
 
         public Usuario usuarioActual { get; set; }
         public int nuevoUsuario { get; set; }
@@ -282,12 +282,24 @@ namespace ProyectoBanco1
         //Eliminar un usuario existente (Baja)
         public void eliminarUsuario(int dni)
         {
-            foreach (Usuario usuario in usuarios)
+            foreach (var user in obtenerUsuarios())
             {
-                if (usuario.dni == dni)
+                
+                if (user.dni == dni)
                 {
-                    contexto.usuarios.Remove(usuario);
-                    contexto.SaveChanges();
+                    if (user.cajas == null && user.pfs == null && user.tarjetas == null)
+                    {
+
+                        contexto.usuarios.Remove(user);
+                        contexto.SaveChanges();
+                        MessageBox.Show("Usuario Eliminado");
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Para poder eliminar el usuario, no debe tener ningun producto a");
+
+                    }
                 }
             }
 
@@ -443,6 +455,7 @@ namespace ProyectoBanco1
 
         public void altaTarjetaCredito(int numero, int cod, double limite, double consumos)
         {
+
             TarjetaDeCredito tc = new TarjetaDeCredito(usuarioActual.id, numero, cod, limite, consumos);
 
             contexto.tarjetas.Add(tc);
@@ -452,17 +465,20 @@ namespace ProyectoBanco1
            
         }
 
-        //public void modificarTarjetaCredito(int dni, float limite)
-        //   {
-        //       foreach (TarjetaDeCredito tarjeta in tarjetas)
-        //       {
-        //           if (tarjeta.titular.dni == dni)
-        //           {
-        //               tarjeta.limite = limite;
-        //           }
-        //       }
+        public void modificarTarjetaCredito(int dni, float limite)
+        {
+            foreach (var obj in obtenerTarjetasDeCredito())
+               {
+                    if (obj.titular.dni == dni)
+                    {
+                    obj.limite = limite;
+                    contexto.tarjetas.Update(obj);
+                    contexto.SaveChanges();
+                    }
+                
+               }
 
-        //   }
+           }
 
         public void bajaTarjetaCredito(int id)
         {
@@ -568,7 +584,7 @@ namespace ProyectoBanco1
                 {
                     if (obj.cbu == cbu)
                     {
-                        foreach (var obj2 in usuarioActual.pagos)
+                        foreach (var obj2 in obtenerPagos())
                         {
                             if (obj2.id == idPago && obj.saldo >= obj2.monto)
                             {
@@ -599,7 +615,7 @@ namespace ProyectoBanco1
                 {
                     if (obj.numero == cbu)
                     {
-                        foreach (var obj2 in usuarioActual.pagos)
+                        foreach (var obj2 in obtenerPagos())
                         {
                             if (obj2.id == idPago)
                             {
