@@ -20,6 +20,7 @@ namespace ProyectoBanco1
         FormPagos ventanaPagos;
         FormPlazosFijos ventanaPlazosFijos;
         FormTarjetasDeCredito ventanaTarjetasDeCredito;
+        FormAdmin ventanaAdmin;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -45,6 +46,7 @@ namespace ProyectoBanco1
             ventanaInicio.ventanaPagos += TransfVentanaPagos;
             ventanaInicio.ventanaPlazosFijos += TransfVentanaPlazosFijos;
             ventanaInicio.ventanaTarjetasDeCredito += TransfVentanaTarjetasDeCredito;
+            ventanaInicio.ventanaAdmin += TransfVentanaAdmin;
             ventanaInicio.Show();
         }
 
@@ -74,6 +76,18 @@ namespace ProyectoBanco1
             ventanaTarjetasDeCredito.MdiParent = this;
             ventanaTarjetasDeCredito.ventanaInicio += TransfVentanaInicio;
             ventanaTarjetasDeCredito.Show();
+        }
+        private void TransfVentanaAdmin()
+        {
+            ventanaAdmin = new FormAdmin(banco);
+            ventanaAdmin.MdiParent = this;
+            ventanaAdmin.ventanaInicio += TransfVentanaInicio;
+            ventanaAdmin.Show();
+        }
+
+        private void FormPrincipal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

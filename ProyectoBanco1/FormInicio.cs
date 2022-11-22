@@ -29,6 +29,11 @@ namespace ProyectoBanco1
         
         public delegate void TransfVentanaTarjetasDeCredito();
         public TransfVentanaTarjetasDeCredito ventanaTarjetasDeCredito;
+
+        public delegate void TransfVentanaAdmin();
+        public TransfVentanaAdmin ventanaAdmin;
+
+
         public FormInicio(Banco banco)
         {
             InitializeComponent();
@@ -68,5 +73,16 @@ namespace ProyectoBanco1
             MessageBox.Show("Se cerró la sesion correctamente", "Sesion de usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            this.ventanaAdmin();
+
+        }
+
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

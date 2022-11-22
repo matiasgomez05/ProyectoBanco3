@@ -293,18 +293,24 @@ namespace ProyectoBanco1
         }
 
         //Modificar un usuario existente (Edición)
-        public void modificarUsuario(int dni, string nombre, string apellido, string mail, string password)
+        public void modificarUsuario(int id, int dni, string nombre, string apellido, string mail, string password, bool bloqueado)
         {
-            foreach (Usuario usuario in usuarios)
+            foreach (var obj in obtenerUsuarios())
             {
-                if (usuario.dni == dni)
+                if (obj.id == id)
                 {
-                    usuario.nombre = nombre;
-                    usuario.apellido = apellido;
-                    usuario.mail = mail;
-                    usuario.password = password;
+                    obj.dni = dni;
+                    obj.nombre = nombre;
+                    obj.apellido = apellido;
+                    obj.mail = mail;
+                    obj.password = password;
+                    obj.bloqueado = bloqueado;
+                    contexto.usuarios.Update(obj);
+                    contexto.SaveChanges();
+                    MessageBox.Show("Usuario modificado.");
                 }
             }
+            
         }
 
 
@@ -614,12 +620,13 @@ namespace ProyectoBanco1
         public void eliminarPago(int id)
         {
             
-            foreach (Pago pago in usuarioActual.pagos.ToList())
+            foreach (Pago pago in obtenerPagos())
             {
                 if (pago.id == id && pago.pagado == true)
                 {
-                    usuarioActual.pagos.Remove(pago);
-                    pagos.Remove(pago);
+                    contexto.pagos.Remove(pago);
+                    contexto.SaveChanges();
+
                     MessageBox.Show("Se elimino el pago del historial.");
                 }
                 else if(pago.id == id && pago.pagado == false)

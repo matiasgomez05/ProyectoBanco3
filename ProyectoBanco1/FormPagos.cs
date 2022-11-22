@@ -34,24 +34,38 @@ namespace ProyectoBanco1
 
         public void refresh()
         {
-            
+            comboBox1.Items.Clear();
             comboBox2.Items.Clear();
             dataGridView1.Rows.Clear();
             dataGridView2.Rows.Clear();
-                       
+            
 
-            foreach (var obj in banco.usuarioActual.pagos)
+            if (banco.usuarioActual.esAdmin)
             {
-                if (obj.pagado == false)
+                comboBox1.Visible = true;
+                foreach(var obj in banco.obtenerUsuarios())
                 {
-
-                    dataGridView1.Rows.Add(obj.id,obj.nombre, obj.monto);
-                }else if (obj.pagado == true)
+                    comboBox1.Items.Add(obj.id);
+                }
+                
+            }
+            else
+            {
+                foreach (var obj in banco.usuarioActual.pagos)
                 {
+                    if (obj.pagado == false)
+                    {
 
-                    dataGridView2.Rows.Add(obj.id, obj.nombre, obj.metodo, obj.monto);
+                        dataGridView1.Rows.Add(obj.id, obj.nombre, obj.monto);
+                    }
+                    else if (obj.pagado == true)
+                    {
+
+                        dataGridView2.Rows.Add(obj.id, obj.nombre, obj.metodo, obj.monto);
+                    }
                 }
             }
+            
 
         }
 
@@ -162,6 +176,31 @@ namespace ProyectoBanco1
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            refresh();
+            foreach (var obj in banco.obtenerPagos())
+            {
+                if (obj.idUsuario == int.Parse(comboBox1.Text))
+                {
+                    if (obj.pagado == false)
+                    {
+
+                        dataGridView1.Rows.Add(obj.id, obj.nombre, obj.monto);
+                    }
+                    else if (obj.pagado == true)
+                    {
+
+                        dataGridView2.Rows.Add(obj.id, obj.nombre, obj.metodo, obj.monto);
+                    }
+
+                }
+                
+            }
+            
 
         }
     }
