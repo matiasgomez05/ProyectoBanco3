@@ -286,7 +286,8 @@ namespace ProyectoBanco1
             {
                 if (usuario.dni == dni)
                 {
-                    usuarios.Remove(usuario);
+                    contexto.usuarios.Remove(usuario);
+                    contexto.SaveChanges();
                 }
             }
 
@@ -297,18 +298,24 @@ namespace ProyectoBanco1
         }
 
         //Modificar un usuario existente (Edición)
-        public void modificarUsuario(int dni, string nombre, string apellido, string mail, string password)
+        public void modificarUsuario(int id, int dni, string nombre, string apellido, string mail, string password, bool bloqueado)
         {
-            foreach (Usuario usuario in usuarios)
+            foreach (var obj in obtenerUsuarios())
             {
-                if (usuario.dni == dni)
+                if (obj.id == id)
                 {
-                    usuario.nombre = nombre;
-                    usuario.apellido = apellido;
-                    usuario.mail = mail;
-                    usuario.password = password;
+                    obj.dni = dni;
+                    obj.nombre = nombre;
+                    obj.apellido = apellido;
+                    obj.mail = mail;
+                    obj.password = password;
+                    obj.bloqueado = bloqueado;
+                    contexto.usuarios.Update(obj);
+                    contexto.SaveChanges();
+                    MessageBox.Show("Usuario modificado.");
                 }
             }
+
         }
 
 
@@ -436,20 +443,15 @@ namespace ProyectoBanco1
 
         public void altaTarjetaCredito(int numero, int cod, double limite, double consumos)
         {
-            int idTarjeta;
-            idTarjeta = DB.agregarTarjeta(usuarioActual.id, numero, cod, limite, consumos);
+            TarjetaDeCredito tc = new TarjetaDeCredito(usuarioActual.id, numero, cod, limite, consumos);
 
-            if (idTarjeta != -1)
-            {
+            contexto.tarjetas.Add(tc);
+            contexto.SaveChanges();
+            MessageBox.Show("la tarjeta se agrego con exito.");
 
-                TarjetaDeCredito tc = new TarjetaDeCredito(idTarjeta, usuarioActual.id, numero, cod, limite, consumos); 
-                tarjetas.Add(tc);
-                usuarioActual.tarjetas.Add(tc);
-
-                MessageBox.Show("la tarjeta se agrego con exito.");
-                
-            }
+           
         }
+
         //public void modificarTarjetaCredito(int dni, float limite)
         //   {
         //       foreach (TarjetaDeCredito tarjeta in tarjetas)
@@ -462,71 +464,65 @@ namespace ProyectoBanco1
 
         //   }
 
-           public void bajaTarjetaCredito(int id)
-           {
-            if (DB.eliminarTarjeta(id) == 1)
+        public void bajaTarjetaCredito(int id)
+        {
+
+            foreach (var obj in obtenerTarjetasDeCredito())
             {
-
-                foreach (var obj in tarjetas.ToList())
+                if (obj.id == id)
                 {
-                    if (obj.id == id)
+                    if (obj.consumos == 0)
                     {
-                        if (obj.consumos == 0)
-                        {
-
-                            usuarioActual.tarjetas.Remove(obj);
-                            tarjetas.Remove(obj);
-                            MessageBox.Show("Tarjeta eliminada con exito.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Para poder eliminar la tarjeta, primero debe pagar los consumos");
-                        }
+                        contexto.tarjetas.Remove(obj);
+                        contexto.SaveChanges();
+                        MessageBox.Show("Tarjeta eliminada con exito.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Para poder eliminar la tarjeta, primero debe pagar los consumos");
                     }
                 }
-
             }
 
-           }
-
+        }
         public void pagarTarjeta(int cbu, int idTarj)
         {
-            foreach (var obj2 in tarjetas)
-            {             
-                 foreach (var obj in cajas)
-                 {
+            foreach (var obj2 in obtenerTarjetasDeCredito())
+            {
+                foreach (var obj in obtenerCajas())
+                {
                     if (cbu == obj.cbu)
                     {
-                        if (idTarj == obj2.id && obj2.consumos > 0 )
+                        if (idTarj == obj2.id && obj2.consumos > 0)
                         {
-                            if(obj.saldo >= obj2.consumos)
+                            if (obj.saldo >= obj2.consumos)
                             {
                                 double consumoAnt = obj2.consumos;
                                 obj.saldo = obj.saldo - obj2.consumos;
                                 obj2.consumos = 0;
                                 double saldoFinal = obj.saldo;
-                                DB.modificarCaja(obj.id , saldoFinal);
-                                DB.modificarTarjeta(idTarj, obj2.consumos);
+                               
+                                contexto.cajas.Update(obj);
+                                contexto.tarjetas.Update(obj2);
+                                Movimiento m1 = new Movimiento(obj.id, "Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
+                                contexto.movimientos.Add(m1);
+
+                                contexto.SaveChanges();
                                 MessageBox.Show("Tarjeta pagada con exito.");
 
-                                int idNuevoMov = DB.agregarMovimiento(obj.id,"Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
-                                if (idNuevoMov != -1)
-                                {
-                                    Movimiento m1 = new Movimiento(obj.id, "Pago de tarjeta: " + obj2.numero, consumoAnt, DateTime.Now);
-                                    movimientos.Add(m1);
-                                    obj.movimientos.Add(m1);
-                                }
+
                             }
-                            else if(obj.saldo < obj2.consumos)
+                            else if (obj.saldo < obj2.consumos)
                             {
                                 MessageBox.Show("No dispones de suficiente saldo en la caja de ahorro.");
                             }
-                        }else if(idTarj == obj2.id && obj2.consumos <= 0)
+                        }
+                        else if (idTarj == obj2.id && obj2.consumos <= 0)
                         {
                             MessageBox.Show("La tarjeta no tiene saldo a pagar.");
                         }
                     }
-                 }
+                }
             }
         }
 
@@ -548,32 +544,24 @@ namespace ProyectoBanco1
         //    return random.Next(min, max + 1);
         //}
 
-        /*
-         * Mostrar Datos
-         */
-
-
 
         /*
          * ABM PAGOS-
          */
 
-
         //   Agregar un nuevo pago 
-
         public void altaPago(string nombre, float monto, bool pagado, string metodo)
         {
-            nuevoPago++;
-            Pago p1 = new Pago(nuevoPago, usuarioActual.id, nombre, monto, pagado, metodo);
-            usuarioActual.pagos.Add(p1);
-            pagos.Add(p1);
 
-
+            Pago p1 = new Pago(usuarioActual.id, nombre, monto, pagado, metodo);
+            //usuarioActual.pagos.Add(p1);
+            //pagos.Add(p1);
+            contexto.pagos.Add(p1);
+            contexto.SaveChanges();
         }
-
         public void generarPago(int idPago, int cbu, bool checkCaja)
         {
-            
+
             if (checkCaja == true)
             {
                 foreach (var obj in obtenerCajas())
@@ -584,26 +572,18 @@ namespace ProyectoBanco1
                         {
                             if (obj2.id == idPago && obj.saldo >= obj2.monto)
                             {
-
                                 obj2.pagado = true;
                                 obj.saldo = obj.saldo - obj2.monto;
                                 obj2.metodo = "Caja de ahorro";
                                 MessageBox.Show("Pago exitoso.");
 
-                                int idNuevoMov =  DB.agregarMovimiento(obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
-                                if (idNuevoMov != -1)
-                                {
-                                    Movimiento m1 = new Movimiento(obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
-                                    movimientos.Add(m1);
-                                    obj.movimientos.Add(m1);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("error en bd mov");
-                                }
-                                
-                                DB.modificarCaja(obj.id, obj.saldo);
-
+                                Movimiento m1 = new Movimiento(obj.id, "Pago de : " + obj2.nombre, obj2.monto, DateTime.Now);
+                               
+                                contexto.movimientos.Add(m1);
+                                contexto.pagos.Update(obj2);
+                                contexto.cajas.Update(obj);
+                                contexto.SaveChanges();
+                               
                             }
                             else if (obj2.id == idPago && obj.saldo < obj2.monto)
                             {
@@ -612,37 +592,37 @@ namespace ProyectoBanco1
                         }
                     }
                 }
-            }else if (checkCaja == false )
+            }
+            else if (checkCaja == false)
             {
-                foreach (var obj in tarjetas)
+                foreach (var obj in obtenerTarjetasDeCredito())
                 {
                     if (obj.numero == cbu)
                     {
                         foreach (var obj2 in usuarioActual.pagos)
                         {
-                            if (obj2.id == idPago )
+                            if (obj2.id == idPago)
                             {
-
                                 obj2.pagado = true;
                                 obj.consumos = obj.consumos + obj2.monto;
                                 obj2.metodo = "Tarjeta de credito";
                                 MessageBox.Show("Pago exitoso.");
-
-                                DB.modificarTarjeta(obj.id, obj.consumos);
+                                //DB.modificarTarjeta(obj.id, obj.consumos);
+                                contexto.tarjetas.Update(obj);
+                                contexto.pagos.Update(obj2);
+                                contexto.SaveChanges();
                             }
-                            
+
                         }
                     }
                 }
-
             }
-           
-        }
 
+        }
         //Modificar un pago existente 
-        public void modificarPago(int id,string nombre, double monto, bool pagado, string metodo)
+        public void modificarPago(int id, string nombre, double monto, bool pagado, string metodo)
         {
-            foreach (Pago pago in pagos)
+            foreach (Pago pago in obtenerPagos())
             {
                 if (pago.id == id)
                 {
@@ -650,49 +630,45 @@ namespace ProyectoBanco1
                     pago.monto = monto;
                     pago.pagado = pagado;
                     pago.metodo = metodo;
-
+                    contexto.pagos.Update(pago);
+                    contexto.SaveChanges();
                 }
             }
         }
+
         //Eliminar un pago existente 
         public void eliminarPago(int id)
         {
-            
-            foreach (Pago pago in usuarioActual.pagos.ToList())
-            {
-                if (pago.id == id && pago.pagado == true)
-                {
-                    usuarioActual.pagos.Remove(pago);
-                    pagos.Remove(pago);
-                    MessageBox.Show("Se elimino el pago del historial.");
-                }
-                else if(pago.id == id && pago.pagado == false)
-                {
 
-                    MessageBox.Show("No se pudo eliminar el pago.");
+                foreach (Pago pago in obtenerPagos())
+                {
+                    if (pago.id == id && pago.pagado == true)
+                    {
+                        contexto.pagos.Remove(pago);
+                        contexto.SaveChanges();
+
+                        MessageBox.Show("Se elimino el pago del historial.");
+                    }
+                    else if (pago.id == id && pago.pagado == false)
+                    {
+                        MessageBox.Show("No se pudo eliminar el pago.");
+                    }
                 }
-            }
         }
 
 
 
         /*
-         * ABM PLAZO FIJO
-         */
-
+        * ABM PLAZO FIJO
+        */
 
         //Crear plazo fijo
-
         float montoCaja;
         public void altaPlazoFijo(float monto, int cbu)
         {
-
             DateTime fechaAnt = new DateTime(2008, 1, 2);
-
             DateTime fechaIni = DateTime.Now;
             DateTime fechaFin = DateTime.Now.AddDays(30);
-
-
             foreach (var obj in usuarioActual.cajas)
             {
                 if (cbu == obj.cbu)
@@ -701,120 +677,97 @@ namespace ProyectoBanco1
                     {
                         if (monto >= 1000)
                         {
-                            int idPlazoFijo;
-                            idPlazoFijo = DB.agregarPlazoFijo(usuarioActual.id, monto, fechaIni, fechaFin,70, false, cbu);
+                            PlazoFijo pf1 = new PlazoFijo(usuarioActual.id, monto, fechaIni, fechaFin, 70, false, cbu);
+                            contexto.pfs.Add(pf1);
+                            obj.saldo = obj.saldo - monto;
 
-                            if (idPlazoFijo != -1)
-                            {
+                            contexto.cajas.Update(obj);
 
-                                PlazoFijo pf1 = new PlazoFijo(idPlazoFijo, usuarioActual.id, monto,fechaIni, fechaFin,70, false, cbu);
-                                usuarioActual.pfs.Add(pf1);
-                                pfs.Add(pf1);
-                                obj.saldo = obj.saldo - monto;
-                                double saldoIn = obj.saldo;
-                                DB.modificarCaja(obj.id, saldoIn);
-                                MessageBox.Show("plazo fijo creado con exito");
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se pudo generar un ID valido para pf");
-                            }
+                            Movimiento mov = new Movimiento(obj.id, "Nuevo plazo fijo", monto, DateTime.Now);
+
+                            contexto.movimientos.Add(mov);
+
+                            MessageBox.Show("plazo fijo creado con exito");
+
+                            contexto.SaveChanges();
                         }
                         else
                         {
                             MessageBox.Show("El monto minimo para un plazo fijo es de $1000");
                         }
-                       
+
                     }
                     else
                     {
                         MessageBox.Show("No dispones de suficiente saldo en la caja de ahorro");
                     }
+                }
 
-                }
-                else
-                {
-                    MessageBox.Show("error");
-                }
             }
-
         }
-
         // verificar pagos de plazo fijo
-
         public bool verificarPf(int id, int cbu)
         {
-            return false;
 
             DateTime fechaAnt = new DateTime(2008, 1, 2);
-            foreach (var obj in pfs)
+            foreach (var obj in obtenerPlazosFijos())
             {
-                foreach (var obj2 in cajas)
+                if (obj.id == id)
                 {
-                    if (obj.id == id )
+                    if (obj.fechaFin <= obj.fechaIni.AddDays(30))
                     {
-                        if (obj.fechaFin >= fechaAnt )
+                        obj.pagado = true;
+                        foreach (var obj2 in obtenerCajas())
                         {
-                            obj.pagado = true;
-
-                            
-                                if (cbu == obj2.cbu)
+                            if (cbu == obj2.cbu)
+                            {
+                                try
                                 {
-
-                                    obj2.saldo = obj2.saldo + (obj.monto + (obj.monto * (obj.tasa / 365) * 30)/100);
+                                    obj2.saldo = obj2.saldo + (obj.monto + (obj.monto * (obj.tasa / 365) * 30) / 100);
                                     double saldoFinal = obj2.saldo;
                                     obj.monto = 0;
-                                    DB.modificarCaja(obj2.id, saldoFinal);
-
-                                    int idNuevoMov = DB.agregarMovimiento(obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
-                                    if (idNuevoMov != -1)
-                                    {
-                                        Movimiento m1 = new Movimiento(obj.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
-                                        movimientos.Add(m1);
-                                        obj2.movimientos.Add(m1);
-                                    }
-
-                                return  true;
+                                    //DB.modificarCaja(obj2.id, saldoFinal);
+                                    contexto.cajas.Update(obj2);
+                                    Movimiento m1 = new Movimiento(obj2.id, "Pago de plazoFijo: " + obj.id, saldoFinal, DateTime.Now);
+                                    //movimientos.Add(m1);
+                                    //obj2.movimientos.Add(m1);
+                                    contexto.movimientos.Add(m1);
+                                    contexto.SaveChanges();
+                                    return true;
                                 }
-                                else
+                                catch (Exception e)
                                 {
-                                    MessageBox.Show("error en caja ");
-                                return  false;
+                                    Console.WriteLine(e.Message);
+                                }
+
                             }
-                            
-                        } else if (obj.fechaFin < fechaAnt) {
-                             MessageBox.Show("error en fecha, todavia no se cumplio el plazo");
-                            return false;
                         }
                     }
-                   
+                    else if (obj.fechaFin < fechaAnt)
+                    {
+                        MessageBox.Show("error en fecha, todavia no se cumplio el plazo");
+                        return false;
+                    }
                 }
-            } 
+
+
+            }
+            return false;
         }
-
         // eliminar plazo fijo
-
         public void eliminarPlazoFijo(int id, int idCaja)
         {
-            if(verificarPf(id, idCaja) == true)
+            if (verificarPf(id, idCaja) == true)
             {
-                if (DB.eliminarPlazoFijo(id) == 1)
+                foreach (var obj in usuarioActual.pfs.ToList())
                 {
-                    foreach (var obj in usuarioActual.pfs.ToList())
+                    if (id == obj.id && obj.pagado == true)
                     {
-                        if (id == obj.id && obj.pagado == true)
-                        {
-                            usuarioActual.pfs.Remove(obj);
-                            pfs.Remove(obj);
-                            MessageBox.Show("plazo fijo eliminado");
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se cumplio el plazo, no es posible eliminar el pf.");
-
-                        }
+                        contexto.pfs.Remove(obj);
+                        contexto.SaveChanges();
+                        MessageBox.Show("plazo fijo eliminado");
                     }
+
                 }
             }
             else
@@ -822,10 +775,7 @@ namespace ProyectoBanco1
                 MessageBox.Show("No se cumplio el plazo,error");
             }
 
-           
         }
-
-
 
 
 

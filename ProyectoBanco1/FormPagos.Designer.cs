@@ -40,19 +40,21 @@
             this.nombreTxt = new System.Windows.Forms.TextBox();
             this.montoTxt = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -64,7 +66,7 @@
             label5.AutoSize = true;
             label5.ForeColor = System.Drawing.SystemColors.ControlText;
             label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            label5.Location = new System.Drawing.Point(299, 484);
+            label5.Location = new System.Drawing.Point(295, 534);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(171, 15);
             label5.TabIndex = 27;
@@ -75,7 +77,7 @@
             label4.AutoSize = true;
             label4.ForeColor = System.Drawing.SystemColors.ControlText;
             label4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            label4.Location = new System.Drawing.Point(299, 531);
+            label4.Location = new System.Drawing.Point(295, 581);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(163, 15);
             label4.TabIndex = 28;
@@ -144,7 +146,7 @@
             // 
             this.pagar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.pagar.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.pagar.Location = new System.Drawing.Point(493, 545);
+            this.pagar.Location = new System.Drawing.Point(489, 595);
             this.pagar.Margin = new System.Windows.Forms.Padding(2);
             this.pagar.Name = "pagar";
             this.pagar.Size = new System.Drawing.Size(106, 40);
@@ -157,7 +159,7 @@
             // 
             this.Eliminar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Eliminar.ForeColor = System.Drawing.Color.Red;
-            this.Eliminar.Location = new System.Drawing.Point(753, 509);
+            this.Eliminar.Location = new System.Drawing.Point(749, 559);
             this.Eliminar.Margin = new System.Windows.Forms.Padding(2);
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.Size = new System.Drawing.Size(106, 40);
@@ -191,7 +193,7 @@
             this.dataGridViewTextBoxColumn1,
             this.detalle,
             this.dataGridViewTextBoxColumn2});
-            this.dataGridView1.Location = new System.Drawing.Point(299, 62);
+            this.dataGridView1.Location = new System.Drawing.Point(295, 112);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 25;
@@ -203,79 +205,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(300, 419);
             this.dataGridView1.TabIndex = 19;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-            this.dataGridView2.Location = new System.Drawing.Point(651, 62);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.ShowCellErrors = false;
-            this.dataGridView2.ShowCellToolTips = false;
-            this.dataGridView2.ShowEditingIcon = false;
-            this.dataGridView2.ShowRowErrors = false;
-            this.dataGridView2.Size = new System.Drawing.Size(305, 419);
-            this.dataGridView2.TabIndex = 20;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(350, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 25);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "PAGOS PENDIENTES";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(707, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(195, 25);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "PAGOS REALIZADOS";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(299, 562);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(167, 23);
-            this.comboBox2.TabIndex = 26;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(311, 502);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(118, 19);
-            this.checkBox1.TabIndex = 29;
-            this.checkBox1.Text = "Tarjeta de Credito";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(468, 502);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(103, 19);
-            this.checkBox2.TabIndex = 30;
-            this.checkBox2.Text = "Caja de ahorro";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            this.checkBox2.CheckStateChanged += new System.EventHandler(this.checkBox2_CheckStateChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -297,6 +226,26 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6});
+            this.dataGridView2.Location = new System.Drawing.Point(647, 112);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowTemplate.Height = 25;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.ShowCellErrors = false;
+            this.dataGridView2.ShowCellToolTips = false;
+            this.dataGridView2.ShowEditingIcon = false;
+            this.dataGridView2.ShowRowErrors = false;
+            this.dataGridView2.Size = new System.Drawing.Size(305, 419);
+            this.dataGridView2.TabIndex = 20;
+            //
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "id";
@@ -323,11 +272,86 @@
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(346, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(194, 25);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "PAGOS PENDIENTES";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(703, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(195, 25);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "PAGOS REALIZADOS";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(295, 612);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(167, 23);
+            this.comboBox2.TabIndex = 26;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(307, 552);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(118, 19);
+            this.checkBox1.TabIndex = 29;
+            this.checkBox1.Text = "Tarjeta de Credito";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(464, 552);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(103, 19);
+            this.checkBox2.TabIndex = 30;
+            this.checkBox2.Text = "Caja de ahorro";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox2.CheckStateChanged += new System.EventHandler(this.checkBox2_CheckStateChanged);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(588, 22);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(146, 23);
+            this.comboBox1.TabIndex = 31;
+            this.comboBox1.Visible = false;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            //  
+            //  label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(289, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(278, 20);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "Para ver pagos, debe elegir ID usuario: ";
+            //  
             // FormPagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 660);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(label4);
@@ -388,5 +412,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private ComboBox comboBox1;
+        private Label label6;
     }
 }

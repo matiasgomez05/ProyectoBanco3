@@ -20,9 +20,9 @@ namespace ProyectoBanco1
 
 
         public PlazoFijo() { }
-        public PlazoFijo(int id, int idTitular, double monto, DateTime fechaIni, DateTime fechaFin, double tasa, bool pagado, int cbu)
+        public PlazoFijo( int idTitular, double monto, DateTime fechaIni, DateTime fechaFin, double tasa, bool pagado, int cbu)
         {
-            this.id = id;
+            
             this.idTitular = idTitular;
             this.monto = monto;
             this.fechaIni = fechaIni;

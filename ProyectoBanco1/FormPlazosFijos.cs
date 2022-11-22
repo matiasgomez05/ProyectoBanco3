@@ -54,17 +54,34 @@ namespace ProyectoBanco1
             comboBox1.Items.Clear();
             dataGridView1.Rows.Clear();
 
-            foreach (var obj2 in banco.obtenerCajas())
+            if (banco.usuarioActual.esAdmin)
             {
-                comboBox1.Items.Add(obj2.cbu);
-            }
 
-            foreach (var obj in banco.obtenerPlazosFijos())
-            {
-                if (obj.idTitular == banco.usuarioActual.id)
+                foreach (var obj2 in banco.obtenerCajas())
                 {
-                   dataGridView1.Rows.Add(obj.id, obj.cbu, "$" + obj.monto, obj.fechaIni.ToShortDateString(), obj.fechaFin.ToShortDateString());
-                           
+                    comboBox1.Items.Add(obj2.cbu);
+                }
+
+                foreach (var obj in banco.obtenerPlazosFijos())
+                {
+                    dataGridView1.Rows.Add(obj.id, obj.cbu, "$" + obj.monto, obj.fechaIni.ToShortDateString(), obj.fechaFin.ToShortDateString());
+
+                }
+            }
+            else
+                {
+                foreach (var obj2 in banco.usuarioActual.cajas.ToList())
+                {
+                    comboBox1.Items.Add(obj2.cbu);
+                }
+
+                foreach (var obj in banco.obtenerPlazosFijos())
+                {
+                    if (obj.idTitular == banco.usuarioActual.id)
+                    {
+                        dataGridView1.Rows.Add(obj.id, obj.cbu, "$" + obj.monto, obj.fechaIni.ToShortDateString(), obj.fechaFin.ToShortDateString());
+
+                    }
                 }
             }
         }

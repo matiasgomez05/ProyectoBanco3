@@ -33,22 +33,43 @@ namespace ProyectoBanco1
             textBox2.Clear();
             textBox3.Clear();
 
-            foreach (var obj2 in banco.obtenerCajas())
-            {
-                        
-              comboBox1.Items.Add(obj2.cbu);
-
-            }
-                
-                   
-
-            foreach (var obj in banco.tarjetas)
-            {
-                if (banco.usuarioActual.id == obj.idTitular)
+            
+                if (banco.usuarioActual.esAdmin)
                 {
+
+                    foreach (var obj2 in banco.obtenerCajas())
+                    {
+
+                    comboBox1.Items.Add(obj2.cbu);
+
+                    }
+
+                    foreach (var obj in banco.obtenerTarjetasDeCredito())
+                    {
+
                     dataGridView1.Rows.Add(obj.id, obj.numero, obj.codigoV, obj.limite, obj.consumos);
+
+                    }
                 }
-            }
+                else
+                {
+                    foreach (var obj2 in banco.usuarioActual.cajas)
+                    {
+                        comboBox1.Items.Add(obj2.cbu);
+                    }
+
+                    foreach (var obj in banco.obtenerTarjetasDeCredito())
+                    {
+                        if (banco.usuarioActual.id == obj.idTitular)
+                        {
+                            dataGridView1.Rows.Add(obj.id, obj.numero, obj.codigoV, obj.limite, obj.consumos);
+                        }
+                    }
+                }
+
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
